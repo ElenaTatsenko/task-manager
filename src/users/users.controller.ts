@@ -1,16 +1,16 @@
-import { Controller, Post, Body, UseGuards, Get } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Get, UsePipes } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 import {Roles} from "../auth/roles-auth.decorator";
 import {RolesGuard} from "../auth/roles.guard";
 import { AddRoleDto } from './dto/add-role.dto';
+import { ValidationPipe } from 'src/pipes/validation.pipes';
 
 @Controller('users')
 export class UsersController {
     constructor(private userService: UsersService) {
-
     }
-    @Post()
+     @Post()
     create(@Body() userDto: CreateUserDto) {
         return this.userService.createUser(userDto);
     }
